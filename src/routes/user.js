@@ -169,6 +169,87 @@ router.get('/exams', (req, res) => {
     });
 });
 
+router.post('/exams', (req, res) => {
+    try {
+        const { title, description, date } = req.body;
+        
+        // Validate required fields
+        if (!title || !description || !date) {
+            return res.status(StatusCodes.BAD_REQUEST).json({
+                error: 'Title, description, and date are required'
+            });
+        }
+
+        // Create new exam object
+        const newExam = {
+            id: exams.length + 1,
+            title,
+            description,
+            date,
+            createdAt: new Date().toISOString()
+        };
+
+        // Add exam to array
+        exams.push(newExam);
+
+        res.status(StatusCodes.CREATED).json({
+            message: 'Exam created successfully',
+            exam: newExam
+        });
+
+    } catch (error) {
+        console.error('Error creating exam:', error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error: 'Internal server error'
+        });
+    }
+});
+router.put('/exams/:id', (req, res) => {
+    try {
+        const examId = parseInt(req.params.id);
+        const { title, description, date } = req.body;
+        
+        // Find the exam by ID
+        const examIndex = exams.findIndex(exam => exam.id === examId);
+        
+        if (examIndex === -1) {
+            return res.status(StatusCodes.NOT_FOUND).json({
+                error: 'Exam not found'
+            });
+        }
+
+        // Validate required fields
+        if (!title || !description || !date) {
+            return res.status(StatusCodes.BAD_REQUEST).json({
+                error: 'Title, description, and date are required'
+            });
+        }
+
+        // Update the exam
+        const updatedExam = {
+            ...exams[examIndex],
+            title,
+            description,
+            date,
+            updatedAt: new Date().toISOString()
+        };
+
+        exams[examIndex] = updatedExam;
+
+        res.status(StatusCodes.OK).json({
+            message: 'Exam updated successfully',
+            exam: updatedExam
+        });
+
+    } catch (error) {
+        console.error('Error updating exam:', error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error: 'Internal server error'
+        });
+    }
+});
+
 
 module.exports = router; 
+
 
