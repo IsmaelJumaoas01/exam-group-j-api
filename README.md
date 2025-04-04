@@ -6,16 +6,16 @@ A RESTful API for managing exams and users, built with Express.js and TypeORM.
 
 ## Contributors and Features
 
-### Member 1
+### Paul Christian T. Patiño
 - Implemented GET /exams endpoint that returns a hardcoded list of users
 
-### Member 2
+### Prince Lazaga
 - Implemented POST /exams endpoint for adding new exams to the system
 
-### Member 3
+### Arnold A. Cutad Jr. 
 - Implemented PUT /exams/:id endpoint for updating existing exams
 
-### Member 4
+### Ismael Jose Jumao-as 
 - Merging of other branches 
 
 ## API Documentation
