@@ -1,3 +1,5 @@
+README CREATION
+
 # Exam Group J API
 
 A RESTful API for managing exams and users, built with Express.js and TypeORM.
